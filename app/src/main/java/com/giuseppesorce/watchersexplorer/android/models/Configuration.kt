@@ -12,7 +12,7 @@ class Configuration @Inject constructor() {
 
 
     val moveBaseUrl: String by lazy {
-        "https://github"
+        "https://api.github.com"
     }
 
     val requestTimeoutSeconds: Long = 5

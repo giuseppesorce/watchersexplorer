@@ -1,16 +1,16 @@
 package com.giuseppesorce.watchersexplorer.data.api
 
+import com.giuseppesorce.watchersexplorer.data.api.models.responses.SerachRepoResponsePayLoad
+import io.reactivex.Single
+import retrofit2.http.GET
+
 /**
  * @author Giuseppe Sorce
  */
 interface SearchApi {
 
-//    @GET("/rest/auth/signup")
-//    fun login(): Single<LoginResponsePayload>
-//
-//
-//    @GET("/movetest/app/api/rest/v1/users/accountsettings")
-//    fun signin(@Query("afterDistributionId") afterDistributionId: String): Single<LoginResponsePayload>
 
+    @GET("/rest/auth/signup")
+     fun searchRepository(): Single<SerachRepoResponsePayLoad>
 
 }

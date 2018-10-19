@@ -22,11 +22,17 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.attachView(this)
+        presenter.searchRepo("clean")
     }
 
 
     override fun onInject() {
         super.onInject()
         mvpComponent.inject(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 }

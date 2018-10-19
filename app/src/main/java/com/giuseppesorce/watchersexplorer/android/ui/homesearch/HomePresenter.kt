@@ -18,6 +18,7 @@ class HomePresenter @Inject constructor() : Presenter<HomeView> {
 
     override fun detachView() {
         view = null
+        compositeDisposable.clear()
     }
 
 
@@ -28,7 +29,9 @@ class HomePresenter @Inject constructor() : Presenter<HomeView> {
 
     }
 
+    fun searchRepo(word: String) {
 
+    }
 
 
 }
