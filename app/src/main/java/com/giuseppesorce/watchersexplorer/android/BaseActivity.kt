@@ -23,14 +23,8 @@ abstract class BaseActivity : AppCompatActivity() {
         onInject()
         super.onCreate(savedInstanceState)
 
-        // As required, fix the orientation to portrait.
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-
-    }
 
     @CallSuper
     open fun onInject() {

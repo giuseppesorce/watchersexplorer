@@ -12,7 +12,6 @@ class HomeSearchActivity : MvpActivity(), HomeView {
 
     }
 
-
     @Inject
     lateinit var presenter: HomePresenter
 

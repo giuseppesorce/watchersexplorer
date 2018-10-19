@@ -50,5 +50,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
 
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit2_rxjava2_adapter_version"
+    //annotation
+    implementation "com.android.support:support-annotations:$android_support_version"
+
 }
 apply plugin: 'kotlin-android-extensions'

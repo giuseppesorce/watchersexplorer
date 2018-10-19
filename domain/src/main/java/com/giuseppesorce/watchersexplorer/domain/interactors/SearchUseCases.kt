@@ -16,14 +16,14 @@ import javax.inject.Inject
 class SearchUseCases @Inject constructor(
     private val searchMapper: SearchMapper,
     private val searchRepository: SearchRepository, workerThreadExecutor: WorkerThreadExecutor,
-    mainThreadExecutor: MainThreadExecutor) : UseCaseSingle<List<Repo>, AccountParameters>(workerThreadExecutor, mainThreadExecutor) {
-    override fun useCaseObservable(params: AccountParameters?): Single<List<Repo>> {
-        return searchRepository.searchRepo().map { searchMapper.getRepo(it) }
+    mainThreadExecutor: MainThreadExecutor) : UseCaseSingle<List<Repo>, SearchParameters>(workerThreadExecutor, mainThreadExecutor) {
+    override fun useCaseObservable(params: SearchParameters?): Single<List<Repo>> {
+        return searchRepository.searchRepo(params?.scopename ).map { searchMapper.getRepo(it) }
     }
 }
 
-data class AccountParameters(
-    val email: String, val password: String, val pushid: String = ""
+data class SearchParameters(
+    val scopename: String
 ) : UseCaseParams
 
 

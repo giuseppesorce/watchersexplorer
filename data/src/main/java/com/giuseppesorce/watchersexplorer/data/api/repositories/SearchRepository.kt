@@ -12,8 +12,8 @@ import javax.inject.Inject
 class SearchRepository @Inject constructor(private val searchApi: SearchApi) {
 
 
-    fun searchRepo(): Single<SerachRepoResponsePayLoad> {
-        return searchApi.searchRepository()
+    fun searchRepo(word :String?): Single<SerachRepoResponsePayLoad> {
+        return searchApi.searchRepository(word ?: "")
     }
 
 

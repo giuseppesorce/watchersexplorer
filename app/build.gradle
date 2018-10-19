@@ -13,6 +13,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
     }
 
 
@@ -51,7 +58,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$android_support_version"
     implementation "com.android.support:recyclerview-v7:$android_support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    // Reactive
+    // Reactivecom.android.support:support
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
@@ -77,6 +84,8 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
     kapt "android.arch.persistence.room:compiler:$roomVersion"
     kapt "android.arch.persistence.room:common:$roomVersion"
+
+    implementation 'com.android.support:support-annotations:25.0.1'
 }
 repositories {
     mavenCentral()
