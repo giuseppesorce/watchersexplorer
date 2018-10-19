@@ -6,14 +6,18 @@ import android.util.Log
 import com.giuseppesorce.common.addDisposableTo
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchParameters
-import com.giuseppesorce.watchersexplorer.domain.interactors.SearchUseCases
+import com.giuseppesorce.watchersexplorer.domain.interactors.SearchRepoUseCases
+import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubcribersUseCases
+import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubscribersParameters
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
  * @author Giuseppe Sorce
  */
-class HomePresenter @Inject constructor(private val searchUseCases: SearchUseCases) : Presenter<HomeView> {
+class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUseCases,
+                                        private val searchSubcribersUseCases: SearchSubcribersUseCases) :
+                                        Presenter<HomeView> {
 
 
 
@@ -39,6 +43,20 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchUseCas
                    Log.e("watcher", "ERRORE: "+error.toString())
 
                  }).addDisposableTo(compositeDisposable)
+
+
+    }
+
+    fun searchSubscribers(owner: String, repo:String) {
+
+        searchSubcribersUseCases.execute(SearchSubscribersParameters(owner, repo)).subscribe({ data ->
+            Log.i("watcher", "Sub: "+data.size)
+
+        }, { error ->
+            Log.e("watcher", "ERRORE: "+error)
+            Log.e("watcher", "ERRORE: "+error.toString())
+
+        }).addDisposableTo(compositeDisposable)
 
 
     }

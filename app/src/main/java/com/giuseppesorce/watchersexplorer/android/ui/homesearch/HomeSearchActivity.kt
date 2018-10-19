@@ -21,7 +21,8 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.attachView(this)
-        presenter.searchRepo("clean")
+        //presenter.searchRepo("clean")
+        presenter.searchSubscribers("daniel-e","tetros")
     }
 
 
