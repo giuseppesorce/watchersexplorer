@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="camswitch" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">#ff009688</item>
+        <!--<item name="android:colorAccent">#009688</item>-->
+        <!--<item name="android:colorActivatedHighlight">#009688</item>-->
+    </style>
+
+
+    <style name="optionmenudetail" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--<item name="android:windowFrame">@null</item>-->
+        <item name="colorPrimaryDark">@color/colorAccentCasual</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+
+
+    </style>
+
+</resources>

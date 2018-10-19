@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="flm_one_u">4dp</dimen>
+    <dimen name="dim_rounder_button">10dp</dimen>
+    <dimen name="flm_margin_small">8dp</dimen>
+</resources>
