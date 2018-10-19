@@ -24,33 +24,21 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(activity: BaseActivity)
-
     fun context(): Context
-    fun gson(): Gson
-
-
 
     fun looperThreadExecutor(): WorkerThreadExecutor
-
     fun mainThreadExecutor(): MainThreadExecutor
 
+    /** HTTP **/
     fun headersConfiguration(): HeadersConfiguration
-
     fun okHttpClient(): OkHttpClient
+    fun gson(): Gson
 
     /** DAO **/
-
     //fun userDao():UsersDao
 
-
-
     /** API **/
-
     fun searchApi(): SearchApi
-
-
-
-
 
 }
 

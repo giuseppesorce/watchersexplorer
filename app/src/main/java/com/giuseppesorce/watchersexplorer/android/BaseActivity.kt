@@ -15,7 +15,6 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * Closure invoked when the home button on the toolbar has been pressed.
      */
-    var onHomeBackButtonPressed: (() -> Unit)? = null
 
     val application: AppAplication
         get() = applicationContext as AppAplication
@@ -38,16 +37,7 @@ abstract class BaseActivity : AppCompatActivity() {
         application.applicationComponent.inject(this)
     }
 
-    @CallSuper
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
-            android.R.id.home -> {
-                onHomeBackButtonPressed?.invoke()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+
 
 //TODO DA VEDERRE
 //    /**

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:name=".android.AppAplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".android.MainActivity">
+        <activity android:name=".android.ui.homesearch.HomeSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

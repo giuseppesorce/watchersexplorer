@@ -40,9 +40,7 @@ dependencies {
 
     // Dagger 2
     compileOnly "com.google.dagger:dagger:$dagger_version"
-
     implementation "com.jakewharton.timber:timber:$timber_version"
-
 
     // Image Utilities
     implementation "com.squareup.picasso:picasso:$picasso_version"
