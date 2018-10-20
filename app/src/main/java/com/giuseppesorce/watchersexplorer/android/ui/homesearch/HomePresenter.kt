@@ -2,13 +2,11 @@ package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 
 
 import android.util.Log
-import com.giuseppesorce.common.addDisposableTo
+import com.giuseppesorce.common.addAnotherDisposableTo
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchParameters
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchRepoUseCases
-import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubcribersUseCases
-import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubscribersParameters
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -46,7 +44,7 @@ class HomePresenter @Inject constructor(
 
             Log.e("watcher", "ERRORE: " + error.toString())
 
-        }).addDisposableTo(compositeDisposable)
+        }).addAnotherDisposableTo(compositeDisposable)
     }
 
 

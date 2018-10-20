@@ -6,6 +6,6 @@ import io.reactivex.disposables.Disposable
 /**
  * @author Giuseppe Sorce
  */
-fun Disposable.addDisposableTo(compositeDisposable: CompositeDisposable) {
+fun Disposable.addAnotherDisposableTo(compositeDisposable: CompositeDisposable) {
     compositeDisposable.add(this)
 }
