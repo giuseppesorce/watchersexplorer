@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:name=".android.AppAplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".android.ui.homesearch.HomeSearchActivity">
+        <activity android:name=".android.ui.homesearch.HomeSearchActivity"
+                  android:windowSoftInputMode="adjustPan"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
