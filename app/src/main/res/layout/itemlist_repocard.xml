@@ -20,9 +20,10 @@
                 android:layout_width="@dimen/dim_img_avatar"
                 android:id="@+id/ivAvatar"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_margin="10dp"
                 android:layout_height="@dimen/dim_img_avatar"/>
-    
+     
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
