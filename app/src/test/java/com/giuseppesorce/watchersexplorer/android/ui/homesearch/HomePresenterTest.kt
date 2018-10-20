@@ -3,7 +3,6 @@ package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchParameters
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchRepoUseCases
-import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubcribersUseCases
 import io.reactivex.Single
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -12,9 +11,8 @@ import org.mockito.Mockito.*
 class HomePresenterTest {
 
     private val searchUseCases = mock(SearchRepoUseCases::class.java)
-    private val searchSubcribersUseCases = mock(SearchSubcribersUseCases::class.java)
 
-    private val presenter = HomePresenter(searchUseCases, searchSubcribersUseCases)
+    private val presenter = HomePresenter(searchUseCases)
 
     @Test
     fun `setup HomeView when attached`() {

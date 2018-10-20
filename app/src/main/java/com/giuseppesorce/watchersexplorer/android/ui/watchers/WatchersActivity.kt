@@ -1,25 +1,23 @@
-package com.giuseppesorce.watchersexplorer.android.ui.homesearch
+package com.giuseppesorce.watchersexplorer.android.ui.watchers
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
 import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
 import com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters.RepoListAdapter
-import com.giuseppesorce.watchersexplorer.android.ui.watchers.WatchersActivity
-import com.giuseppesorce.watchersexplorer.data.api.models.Repo
 import kotlinx.android.synthetic.main.activity_homesearch.*
 import javax.inject.Inject
 
-class HomeSearchActivity : MvpActivity(), HomeView {
+class WatchersActivity : MvpActivity(), WatchersView {
 
 
     // inject presenter
     @Inject
-    lateinit var presenter: HomePresenter
+    lateinit var presenter: WatcherPresenter
     // create adapter
     private val repoListAdapter: RepoListAdapter by lazy {
         RepoListAdapter()
@@ -44,58 +42,33 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
-        presenter.onSubmitSearch("home")
-
     }
 
-    @Override
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater?.inflate(R.menu.home, menu)
-        mainMenu = menu
-        setupSearch()
-        return true
-    }
 
-    /**
-     * setup seach action; submit and change text
-     */
-    private fun setupSearch() {
-        var searchView = MenuItemCompat.getActionView(mainMenu.findItem(R.id.menu_search)) as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                presenter.onSubmitSearch(query)
-                return false
-            }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                presenter.onQueryTextChangeSearch(newText)
-                return false
-            }
-        })
-    }
-
-    override fun updateRepoList(reposList: List<Repo>) {
-
-        repoListAdapter.allRepos = reposList
-    }
 
     override fun setupView() {
         rvList.layoutManager = listLayoutManager
         rvList.adapter = repoListAdapter
-        repoListAdapter.onActionClickListener = { repo: Repo, position: Int ->
-            presenter.onSelectRepo(repo)
-        }
     }
-
-
-    override fun showWatchers(name: String, nameOwner: String) {
-       startActivity(WatchersActivity.newIntent(applicationContext, nameOwner))
-    }
-
 
     override fun showMessage(message: String) {
 
 
+    }
+
+
+    companion object {
+        var OWNER: String = "owner"
+        var REPO: String = "repo"
+        fun newIntent(context: Context, owner: String = "",  repo: String = ""): Intent {
+            val intent = Intent(context, WatchersActivity::class.java)
+
+            intent.putExtra(OWNER, owner)
+            intent.putExtra(REPO, repo)
+
+            return intent
+        }
     }
 
     override fun getPresenter(): Presenter<*> = presenter

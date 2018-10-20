@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".android.ui.watchers.WatchersActivity"
+                android:screenOrientation="portrait"
+                />
     </application>
 
 </manifest> 
