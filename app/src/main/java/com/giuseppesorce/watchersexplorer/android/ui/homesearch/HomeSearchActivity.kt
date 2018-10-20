@@ -85,29 +85,41 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         }
     }
 
-    override fun showHideAlertMessage(isShow:Boolean) {
-        tvMessage.visibility=getIsVisible(isShow)
+    override fun showHideAlertMessage(isShow: Boolean) {
+        tvMessage.visibility = getIsVisible(isShow)
     }
 
     override fun showHideProgress(isShow: Boolean) {
-        progressBar.visibility=getIsVisible(isShow)
+        progressBar.visibility = getIsVisible(isShow)
     }
 
-    private fun getIsVisible(isShow: Boolean)=when(isShow){
+    private fun getIsVisible(isShow: Boolean) = when (isShow) {
         true -> View.VISIBLE
         else -> View.GONE
     }
+
+    override fun hideShowList(isShow: Boolean) {
+        when (isShow) {
+            true -> rvList.visibility = View.VISIBLE
+            else -> {
+                rvList.visibility = View.GONE
+                repoListAdapter.clear()
+            }
+        }
+
+    }
+
 
     override fun getStr(stringResId: Int): String = getString(stringResId)
 
 
     override fun showWatchers(nameRepo: String, nameOwner: String) {
-       startActivity(WatchersActivity.newIntent(applicationContext, nameOwner, nameRepo))
+        startActivity(WatchersActivity.newIntent(applicationContext, nameOwner, nameRepo))
     }
 
 
     override fun showMessage(message: String) {
-        tvMessage.text= message
+        tvMessage.text = message
     }
 
     override fun getPresenter(): Presenter<*> = presenter

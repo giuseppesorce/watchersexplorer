@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.View
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
@@ -63,8 +64,25 @@ class WatchersActivity : MvpActivity(), WatchersView {
         repoWatchersAdapter.allWatchers= watchers
     }
 
-    override fun showMessage(message: String) {
+    override fun showHideAlertMessage(isShow:Boolean) {
+        tvMessage.visibility=getIsVisible(isShow)
+    }
 
+    override fun showHideProgress(isShow: Boolean) {
+        progressBar.visibility=getIsVisible(isShow)
+    }
+
+    private fun getIsVisible(isShow: Boolean)=when(isShow){
+        true -> View.VISIBLE
+        else -> View.GONE
+    }
+
+    override fun getStr(stringResId: Int): String = getString(stringResId)
+
+
+
+    override fun showMessage(message: String) {
+        tvMessage.text= message
     }
 
     override fun closeActivity() {
