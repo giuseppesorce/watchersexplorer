@@ -1,9 +1,9 @@
 package com.giuseppesorce.watchersexplorer.domain.mappers
 
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
-import com.giuseppesorce.watchersexplorer.data.api.models.RepoSubscriber
+import com.giuseppesorce.watchersexplorer.data.api.models.RepoWatcher
 import com.giuseppesorce.watchersexplorer.data.api.models.responses.SearchRepoResponsePayLoad
-import com.giuseppesorce.watchersexplorer.data.api.models.responses.SearchSubscribersRepoResponsePayLoad
+import com.giuseppesorce.watchersexplorer.data.api.models.responses.SubscriberResponse
 import javax.inject.Inject
 
 /**
@@ -36,8 +36,19 @@ class SearchMapper @Inject constructor() {
 
     }
 
-    fun getSubscribers(it: SearchSubscribersRepoResponsePayLoad): List<RepoSubscriber>? {
-        return emptyList<RepoSubscriber>()
+    fun getWatchers(serverWatchers: List<SubscriberResponse>?): List<RepoWatcher>? {
+
+        return serverWatchers?.let {
+
+            it.map {
+                RepoWatcher(
+                    it.login ?: "", it.avatar_url ?: "", it.id
+                )
+            }
+        }?: emptyList()
+
+
+
 
     }
 

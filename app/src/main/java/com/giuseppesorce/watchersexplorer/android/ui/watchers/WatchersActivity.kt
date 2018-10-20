@@ -8,7 +8,8 @@ import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
-import com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters.RepoListAdapter
+import com.giuseppesorce.watchersexplorer.android.ui.adapters.RepoWatchersAdapter
+import com.giuseppesorce.watchersexplorer.data.api.models.RepoWatcher
 import kotlinx.android.synthetic.main.activity_homesearch.*
 import javax.inject.Inject
 
@@ -19,8 +20,8 @@ class WatchersActivity : MvpActivity(), WatchersView {
     @Inject
     lateinit var presenter: WatcherPresenter
     // create adapter
-    private val repoListAdapter: RepoListAdapter by lazy {
-        RepoListAdapter()
+    private val repoWatchersAdapter: RepoWatchersAdapter by lazy {
+        RepoWatchersAdapter()
     }
 
     private lateinit var mainMenu: Menu
@@ -36,37 +37,37 @@ class WatchersActivity : MvpActivity(), WatchersView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homesearch)
+        intent?.getStringExtra(WatchersActivity.OWNER)?.let {
+            presenter.setOwner(it)
+        }
+        intent?.getStringExtra(WatchersActivity.REPO)?.let {
+            presenter.setRepo(it)
+        }
         presenter.attachView(this)
-        // setup toolbar
-        setSupportActionBar(toolBar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        presenter.loadWatchers()
     }
-
-
-
 
     override fun setupView() {
         rvList.layoutManager = listLayoutManager
-        rvList.adapter = repoListAdapter
+        rvList.adapter = repoWatchersAdapter
+    }
+
+    override fun updateWatchers(watchers: List<RepoWatcher>) {
+        repoWatchersAdapter.allWatchers= watchers
     }
 
     override fun showMessage(message: String) {
 
-
     }
-
 
     companion object {
         var OWNER: String = "owner"
         var REPO: String = "repo"
-        fun newIntent(context: Context, owner: String = "",  repo: String = ""): Intent {
+        fun newIntent(context: Context, owner: String,  repo: String ): Intent {
             val intent = Intent(context, WatchersActivity::class.java)
 
             intent.putExtra(OWNER, owner)
             intent.putExtra(REPO, repo)
-
             return intent
         }
     }

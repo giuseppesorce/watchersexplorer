@@ -1,7 +1,7 @@
 package com.giuseppesorce.watchersexplorer.android.ui.watchers
 
 import com.giuseppesorce.watchersexplorer.android.mvp.CView
-import com.giuseppesorce.watchersexplorer.data.api.models.Repo
+import com.giuseppesorce.watchersexplorer.data.api.models.RepoWatcher
 
 
 /**
@@ -9,5 +9,6 @@ import com.giuseppesorce.watchersexplorer.data.api.models.Repo
  */
 interface WatchersView : CView {
     fun setupView()
+    fun updateWatchers(watchers: List<RepoWatcher>)
 
 }

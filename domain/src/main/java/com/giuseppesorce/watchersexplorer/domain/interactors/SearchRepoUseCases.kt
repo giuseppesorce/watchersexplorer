@@ -3,7 +3,7 @@ package com.giuseppesorce.watchersexplorer.domain.interactors
 import com.giuseppesorce.common.executors.MainThreadExecutor
 import com.giuseppesorce.common.executors.WorkerThreadExecutor
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
-import com.giuseppesorce.watchersexplorer.data.api.models.RepoSubscriber
+import com.giuseppesorce.watchersexplorer.data.api.models.RepoWatcher
 import com.giuseppesorce.watchersexplorer.data.api.repositories.SearchRepository
 import com.giuseppesorce.watchersexplorer.domain.mappers.SearchMapper
 import io.reactivex.Single
@@ -26,9 +26,9 @@ class SearchRepoUseCases @Inject constructor(
 class SearchSubcribersUseCases @Inject constructor(
     private val searchMapper: SearchMapper,
     private val searchRepository: SearchRepository, workerThreadExecutor: WorkerThreadExecutor,
-    mainThreadExecutor: MainThreadExecutor) : UseCaseSingle<List<RepoSubscriber>, SearchSubscribersParameters>(workerThreadExecutor, mainThreadExecutor) {
-    override fun useCaseObservable(params: SearchSubscribersParameters?): Single<List<RepoSubscriber>> {
-        return searchRepository.searchSubscribers(params?.owner ?: "", params?.repo ?: "").map { searchMapper.getSubscribers(it) }
+    mainThreadExecutor: MainThreadExecutor) : UseCaseSingle<List<RepoWatcher>, SearchSubscribersParameters>(workerThreadExecutor, mainThreadExecutor) {
+    override fun useCaseObservable(params: SearchSubscribersParameters?): Single<List<RepoWatcher>> {
+        return searchRepository.searchSubscribers(params?.owner ?: "", params?.repo ?: "").map { searchMapper.getWatchers(it) }
     }
 }
 

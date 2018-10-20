@@ -5,6 +5,7 @@ import android.util.Log
 import com.giuseppesorce.common.addAnotherDisposableTo
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
 import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubcribersUseCases
+import com.giuseppesorce.watchersexplorer.domain.interactors.SearchSubscribersParameters
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class WatcherPresenter @Inject constructor(
 
     private var view: WatchersView? = null
     private var compositeDisposable = CompositeDisposable()
-    private val MIN_CHARS: Int = 3
+
 
     override fun detachView() {
         view = null
@@ -31,12 +32,10 @@ class WatcherPresenter @Inject constructor(
         view.setupView()
     }
 
-    private fun searchRepo(word: String) {
+    private fun searchWatchers(owner:String, repo:String) {
 
-        searchSubcribersUseCases.execute().subscribe({ repo ->
-
-
-
+        searchSubcribersUseCases.execute(SearchSubscribersParameters(owner= owner, repo = repo)).subscribe({ watchers ->
+            view?.updateWatchers(watchers)
         }, { error ->
 
             Log.e("watcher", "ERRORE: " + error.toString())
@@ -44,7 +43,26 @@ class WatcherPresenter @Inject constructor(
         }).addAnotherDisposableTo(compositeDisposable)
     }
 
+    private var owner: String=""
+    private var repo: String=""
 
+    fun setOwner(owner: String) {
+
+        this.owner= owner
+    }
+
+    fun setRepo(repo: String){
+        this.repo= repo
+    }
+
+    fun loadWatchers() {
+        if(!owner.isEmpty() && !repo.isEmpty()){
+            searchWatchers(owner, repo)
+        }else{
+            //TODO show error in activity
+        }
+
+    }
 
 
 }

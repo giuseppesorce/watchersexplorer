@@ -8,7 +8,7 @@ import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
-import com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters.RepoListAdapter
+import com.giuseppesorce.watchersexplorer.android.ui.adapters.RepoListAdapter
 import com.giuseppesorce.watchersexplorer.android.ui.watchers.WatchersActivity
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
 import kotlinx.android.synthetic.main.activity_homesearch.*
@@ -75,7 +75,6 @@ class HomeSearchActivity : MvpActivity(), HomeView {
     }
 
     override fun updateRepoList(reposList: List<Repo>) {
-
         repoListAdapter.allRepos = reposList
     }
 
@@ -88,8 +87,8 @@ class HomeSearchActivity : MvpActivity(), HomeView {
     }
 
 
-    override fun showWatchers(name: String, nameOwner: String) {
-       startActivity(WatchersActivity.newIntent(applicationContext, nameOwner))
+    override fun showWatchers(nameRepo: String, nameOwner: String) {
+       startActivity(WatchersActivity.newIntent(applicationContext, nameOwner, nameRepo))
     }
 
 

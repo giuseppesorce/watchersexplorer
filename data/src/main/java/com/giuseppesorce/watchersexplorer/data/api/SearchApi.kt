@@ -1,7 +1,7 @@
 package com.giuseppesorce.watchersexplorer.data.api
 
 import com.giuseppesorce.watchersexplorer.data.api.models.responses.SearchRepoResponsePayLoad
-import com.giuseppesorce.watchersexplorer.data.api.models.responses.SearchSubscribersRepoResponsePayLoad
+import com.giuseppesorce.watchersexplorer.data.api.models.responses.SubscriberResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,6 +17,6 @@ interface SearchApi {
     fun searchRepository(@Query("q") word: String): Single<SearchRepoResponsePayLoad>
 
     @GET("repos/{owner}/{repo}/subscribers")
-    fun searchSubscribers(@Path("owner")  owner: String, @Path("repo")  repo: String): Single<SearchSubscribersRepoResponsePayLoad>
+    fun searchSubscribers(@Path("owner")  owner: String, @Path("repo")  repo: String): Single<List<SubscriberResponse>>
 
 }
