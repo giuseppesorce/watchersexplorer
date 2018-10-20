@@ -42,6 +42,10 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
         return MyViewHolder(v)
     }
 
+    fun clear() {
+        allRepos= emptyList()
+    }
+
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -52,7 +56,7 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
         val tvCount: TextView by bindView(R.id.tvCount)
         val tvWatcher: TextView by bindView(R.id.tvWatcher)
         fun bindItems(repo: Repo): View {
-            Picasso.get().load(repo.avatar_url).resize(300,300).transform(CircleTransformBorder(Color.parseColor("#d8d8d8"))).into(ivAvatar)
+            Picasso.get().load(repo.avatar_url).placeholder(R.drawable.ic_github_placeholder).resize(300,300).transform(CircleTransformBorder(Color.parseColor("#d8d8d8"))).into(ivAvatar)
             tvRepoName.text = repo.name
             tvOwnerName.text = repo.nameOwner
             tvDescription.text = repo.description

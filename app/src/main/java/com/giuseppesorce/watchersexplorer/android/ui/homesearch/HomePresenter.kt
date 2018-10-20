@@ -25,7 +25,6 @@ class HomePresenter @Inject constructor(
 
     private var view: HomeView? = null
     private var compositeDisposable = CompositeDisposable()
-    private val MIN_CHARS: Int = 3
 
     override fun detachView() {
         view = null
@@ -44,6 +43,14 @@ class HomePresenter @Inject constructor(
 
             view?.updateRepoList(repo)
             view?.showHideProgress(false)
+            view?.hideShowList(true)
+            when(repo.size >0){
+                true -> ""
+                    else -> {
+                        view?.showMessage (view?.getStr(R.string.no_repo_found) ?: "")
+                        view?.showHideAlertMessage(true)
+                    }
+            }
 
         }, { error ->
 
@@ -55,8 +62,6 @@ class HomePresenter @Inject constructor(
                 view?.showMessage(view?.getStr(R.string.noConnection) ?: "")
             }
 
-
-
         }).addAnotherDisposableTo(compositeDisposable)
     }
 
@@ -67,6 +72,7 @@ class HomePresenter @Inject constructor(
         } else {
             view?.showHideAlertMessage(false)
             view?.showHideProgress(true)
+            view?.hideShowList(false)
             searchRepo(query)
         }
 
