@@ -1,6 +1,7 @@
 package com.giuseppesorce.move.android.di.module
 
 
+import com.giuseppesorce.watchersexplorer.android.models.Configuration
 import com.giuseppesorce.watchersexplorer.android.mvp.PresenterProvider
 import com.giuseppesorce.watchersexplorer.android.ui.homesearch.HomePresenter
 import com.giuseppesorce.watchersexplorer.android.ui.watchers.WatcherPresenter
@@ -19,10 +20,10 @@ class MvpModule(private val presenterProvider: PresenterProvider) {
 
 
     @Provides
-    fun homePresenter(searchUseCases: SearchRepoUseCases, searchSubcribersUseCases: SearchSubcribersUseCases): HomePresenter {
+    fun homePresenter(searchUseCases: SearchRepoUseCases,  configuration: Configuration): HomePresenter {
         val presenter = presenterProvider.getRetainedPresenter() as? HomePresenter
         return presenter
-            ?: HomePresenter(searchUseCases)
+            ?: HomePresenter(searchUseCases, configuration)
     }
 
     @Provides

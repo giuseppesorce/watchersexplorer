@@ -5,6 +5,7 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
+import android.view.View
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
@@ -55,7 +56,7 @@ class HomeSearchActivity : MvpActivity(), HomeView {
     }
 
     /**
-     * setup seach action; submit and change text
+     * setup search action; submit and change text
      */
     private fun setupSearch() {
         var searchView = MenuItemCompat.getActionView(mainMenu.findItem(R.id.menu_search)) as SearchView
@@ -84,6 +85,21 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         }
     }
 
+    override fun showHideAlertMessage(isShow:Boolean) {
+        tvMessage.visibility=getIsVisible(isShow)
+    }
+
+    override fun showHideProgress(isShow: Boolean) {
+        progressBar.visibility=getIsVisible(isShow)
+    }
+
+    private fun getIsVisible(isShow: Boolean)=when(isShow){
+        true -> View.VISIBLE
+        else -> View.GONE
+    }
+
+    override fun getStr(stringResId: Int): String = getString(stringResId)
+
 
     override fun showWatchers(nameRepo: String, nameOwner: String) {
        startActivity(WatchersActivity.newIntent(applicationContext, nameOwner, nameRepo))
@@ -91,8 +107,7 @@ class HomeSearchActivity : MvpActivity(), HomeView {
 
 
     override fun showMessage(message: String) {
-
-
+        tvMessage.text= message
     }
 
     override fun getPresenter(): Presenter<*> = presenter

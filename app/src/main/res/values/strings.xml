@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">WatchersExplorer</string>
+    <string name="app_name">Watchers Explorer</string>
+    <string name="startMessage">Tap on search icon and insert a keyword to get repo list</string>
+    <string name="noConnection">Nessuna connessione</string>
 </resources>
