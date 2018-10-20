@@ -23,6 +23,7 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
 
     private var view: HomeView? = null
     private var compositeDisposable = CompositeDisposable()
+    private val MIN_CHARS: Int=3
 
     override fun detachView() {
         view = null
@@ -33,7 +34,7 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
         this.view = view
     }
 
-    fun searchRepo(word: String) {
+   private fun searchRepo(word: String) {
 
         searchUseCases.execute(SearchParameters(word)).subscribe({ data ->
             Log.i("watcher", "Repo: "+data.size)
@@ -61,11 +62,18 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
 
     }
 
+
+
     fun onSubmitSearch(query: String) {
+        if(query.isNullOrEmpty() || query.length < MIN_CHARS ){
+            view?.showMessage("Error min chars is...")
+        }else{
+            searchRepo(query)
+        }
 
     }
 
-    fun onQueryTextChangeSearch(query: Any) {
+    fun onQueryTextChangeSearch(query: String) {
 
     }
 

@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
 import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
-
 import kotlinx.android.synthetic.main.c_toolbar.*
 import javax.inject.Inject
 
@@ -45,17 +42,17 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         return true
     }
 
+    /**
+     * setup seach action; submit and change text
+     */
     private fun setupSearch() {
         var searchView = MenuItemCompat.getActionView(mainMenu.findItem(R.id.menu_search)) as SearchView
-        val item = mainMenu.findItem(R.id.menu_search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 presenter.onSubmitSearch(query)
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
-
                 presenter.onQueryTextChangeSearch(newText)
                 return false
             }
@@ -63,6 +60,7 @@ class HomeSearchActivity : MvpActivity(), HomeView {
     }
 
 
+    // inject activity
     override fun onInject() {
         super.onInject()
         mvpComponent.inject(this)
