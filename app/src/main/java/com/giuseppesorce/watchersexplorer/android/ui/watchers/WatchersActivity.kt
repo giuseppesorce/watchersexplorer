@@ -3,6 +3,7 @@ package com.giuseppesorce.watchersexplorer.android.ui.watchers
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_homesearch.*
 import javax.inject.Inject
 
 class WatchersActivity : MvpActivity(), WatchersView {
+
 
 
     // inject presenter
@@ -45,6 +47,11 @@ class WatchersActivity : MvpActivity(), WatchersView {
         }
         presenter.attachView(this)
         presenter.loadWatchers()
+        //setup toolbar
+        toolBar.navigationIcon= ContextCompat.getDrawable(applicationContext, R.drawable.ic_back)
+        toolBar.setNavigationOnClickListener {
+            presenter.setOnBack()
+        }
     }
 
     override fun setupView() {
@@ -60,12 +67,16 @@ class WatchersActivity : MvpActivity(), WatchersView {
 
     }
 
+    override fun closeActivity() {
+
+        finish()
+    }
+
     companion object {
         var OWNER: String = "owner"
         var REPO: String = "repo"
         fun newIntent(context: Context, owner: String,  repo: String ): Intent {
             val intent = Intent(context, WatchersActivity::class.java)
-
             intent.putExtra(OWNER, owner)
             intent.putExtra(REPO, repo)
             return intent

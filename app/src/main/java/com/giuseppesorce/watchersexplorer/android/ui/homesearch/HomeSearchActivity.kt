@@ -44,8 +44,6 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
-        presenter.onSubmitSearch("home")
-
     }
 
     @Override

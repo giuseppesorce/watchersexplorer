@@ -10,5 +10,6 @@ import com.giuseppesorce.watchersexplorer.data.api.models.RepoWatcher
 interface WatchersView : CView {
     fun setupView()
     fun updateWatchers(watchers: List<RepoWatcher>)
+    fun closeActivity()
 
 }

@@ -64,5 +64,11 @@ class WatcherPresenter @Inject constructor(
 
     }
 
+    fun setOnBack() {
+        //so i can close or cancel view or process before finish() activity
+        view?.closeActivity()
+
+    }
+
 
 }
