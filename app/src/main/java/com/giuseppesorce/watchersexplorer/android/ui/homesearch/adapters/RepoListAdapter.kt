@@ -45,9 +45,18 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val ivAvatar: ImageView by bindView(R.id.ivAvatar)
+        val tvRepoName: TextView by bindView(R.id.tvRepoName)
+        val tvOwnerName: TextView by bindView(R.id.tvOwnerName)
+        val tvDescription: TextView by bindView(R.id.tvDescription)
+        val tvCount: TextView by bindView(R.id.tvCount)
 
         fun bindItems(repo: Repo): View {
             Picasso.get().load(repo.avatar_url).resize(300,300).transform(CircleTransformBorder(Color.parseColor("#d8d8d8"))).into(ivAvatar)
+
+            tvRepoName.text = repo.name
+            tvOwnerName.text = repo.nameOwner
+            tvDescription.text = repo.description
+            tvCount.text = repo.forks_count.toString()
             return itemView
         }
     }

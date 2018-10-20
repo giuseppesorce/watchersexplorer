@@ -23,11 +23,12 @@ class SearchMapper @Inject constructor() {
                     it.description,
                     it.language ?: "",
                     it.private,
-                    it?.fork,
+                    it?.forks_count,
                     it.owner?.id ?: 0,
                     it.owner?.login,
                     it.owner?.avatar_url,
-                    it.owner?.repos_url
+                    it.owner?.repos_url,
+                    it.owner?.login
                 )
             }
 

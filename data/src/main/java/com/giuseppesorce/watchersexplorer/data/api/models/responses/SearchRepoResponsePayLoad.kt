@@ -19,7 +19,7 @@ class ItemRepo {
     var description: String? = null
     var language: String? = null
     var private: Boolean = false
-    var fork: Boolean = false
+    var forks_count: Int=0
     @Expose
     var owner: Owner? = null
 

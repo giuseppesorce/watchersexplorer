@@ -10,9 +10,10 @@ data class Repo(
     var description: String? = null,
     var language: String? = null,
     var private: Boolean = false,
-    var fork: Boolean = false,
+    var forks_count: Int,
     var ownerId: Int,
     var login: String? = null,
     var avatar_url: String? = null,
-    var repos_url: String? = null
+    var repos_url: String? = null,
+    var nameOwner: String? = null
 )
