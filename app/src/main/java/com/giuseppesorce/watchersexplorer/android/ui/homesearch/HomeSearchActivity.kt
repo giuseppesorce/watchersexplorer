@@ -3,7 +3,6 @@ package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 import android.os.Bundle
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
@@ -31,9 +30,6 @@ class HomeSearchActivity : MvpActivity(), HomeView {
             false
         )
     }
-
-
-    override fun getPresenter(): Presenter<*> = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +85,9 @@ class HomeSearchActivity : MvpActivity(), HomeView {
 
 
     }
+
+
+    override fun getPresenter(): Presenter<*> = presenter
 
     // inject activity
     override fun onInject() {

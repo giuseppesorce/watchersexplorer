@@ -1,13 +1,17 @@
 package com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.giuseppesorce.common.transformationimage.CircleTransformBorder
 import com.giuseppesorce.commonui.bindView
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
+import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
 /**
@@ -40,12 +44,10 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val ivAvatar: ImageView by bindView(R.id.ivAvatar)
 
-        val tvLabel: TextView by bindView(R.id.tvLabel)
-
-        fun bindItems(action: Repo): View {
-
-            tvLabel.text = action.name
+        fun bindItems(repo: Repo): View {
+            Picasso.get().load(repo.avatar_url).resize(300,300).transform(CircleTransformBorder(Color.parseColor("#d8d8d8"))).into(ivAvatar)
             return itemView
         }
     }
