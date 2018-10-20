@@ -1,7 +1,6 @@
 package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 
 
-
 import android.util.Log
 import com.giuseppesorce.common.addDisposableTo
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
@@ -15,15 +14,16 @@ import javax.inject.Inject
 /**
  * @author Giuseppe Sorce
  */
-class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUseCases,
-                                        private val searchSubcribersUseCases: SearchSubcribersUseCases) :
-                                        Presenter<HomeView> {
-
+class HomePresenter @Inject constructor(
+    private val searchUseCases: SearchRepoUseCases,
+    private val searchSubcribersUseCases: SearchSubcribersUseCases
+) :
+    Presenter<HomeView> {
 
 
     private var view: HomeView? = null
     private var compositeDisposable = CompositeDisposable()
-    private val MIN_CHARS: Int=3
+    private val MIN_CHARS: Int = 3
 
     override fun detachView() {
         view = null
@@ -35,29 +35,27 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
         view.setupView()
     }
 
-   private fun searchRepo(word: String) {
+    private fun searchRepo(word: String) {
 
         searchUseCases.execute(SearchParameters(word)).subscribe({ repo ->
 
             view?.updateRepoList(repo)
 
-                 }, { error ->
-                   Log.e("watcher", "ERRORE: "+error)
-                   Log.e("watcher", "ERRORE: "+error.toString())
+        }, { error ->
 
-                 }).addDisposableTo(compositeDisposable)
+            Log.e("watcher", "ERRORE: " + error.toString())
 
-
+        }).addDisposableTo(compositeDisposable)
     }
 
-    fun searchSubscribers(owner: String, repo:String) {
+    fun searchSubscribers(owner: String, repo: String) {
 
         searchSubcribersUseCases.execute(SearchSubscribersParameters(owner, repo)).subscribe({ data ->
-            Log.i("watcher", "Sub: "+data.size)
+            Log.i("watcher", "Sub: " + data.size)
 
         }, { error ->
-            Log.e("watcher", "ERRORE: "+error)
-            Log.e("watcher", "ERRORE: "+error.toString())
+            Log.e("watcher", "ERRORE: " + error)
+            Log.e("watcher", "ERRORE: " + error.toString())
 
         }).addDisposableTo(compositeDisposable)
 
@@ -65,11 +63,10 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
     }
 
 
-
     fun onSubmitSearch(query: String) {
-        if(query.isNullOrEmpty() || query.length < MIN_CHARS ){
+        if (query.isNullOrEmpty() || query.length < MIN_CHARS) {
             view?.showMessage("Error min chars is...")
-        }else{
+        } else {
             searchRepo(query)
         }
 

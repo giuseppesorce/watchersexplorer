@@ -3,6 +3,7 @@ package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 import android.os.Bundle
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
@@ -11,7 +12,6 @@ import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
 import com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters.RepoListAdapter
 import com.giuseppesorce.watchersexplorer.data.api.models.Repo
 import kotlinx.android.synthetic.main.activity_homesearch.*
-
 import javax.inject.Inject
 
 class HomeSearchActivity : MvpActivity(), HomeView {
@@ -24,17 +24,27 @@ class HomeSearchActivity : MvpActivity(), HomeView {
         RepoListAdapter()
     }
 
+    private val listLayoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(
+            applicationContext,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+    }
+
+
     override fun getPresenter(): Presenter<*> = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homesearch)
         presenter.attachView(this)
-        //setup toolbar
+        // setup toolbar
         setSupportActionBar(toolBar)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+
     }
 
     private lateinit var mainMenu: Menu
@@ -71,17 +81,14 @@ class HomeSearchActivity : MvpActivity(), HomeView {
     }
 
     override fun setupView() {
-        val layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        rvList.layoutManager = layoutManager
+        rvList.layoutManager = listLayoutManager
         rvList.adapter = repoListAdapter
     }
-
 
     override fun showMessage(message: String) {
 
 
     }
-
 
     // inject activity
     override fun onInject() {

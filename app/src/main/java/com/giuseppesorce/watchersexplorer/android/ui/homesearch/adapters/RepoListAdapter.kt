@@ -13,34 +13,32 @@ import kotlin.properties.Delegates
 /**
  * @author Giuseppe Sorce
  */
-class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
+class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter<RepoListAdapter.MyViewHolder>() {
 
 
     override fun getItemCount(): Int = allRepos.size
 
-    var onActionClickListener: ((action: Repo, position: Int) -> Unit)? = null
+    var onActionClickListener: ((action: String, position: Int) -> Unit)? = null
 
     var allRepos by Delegates.observable(repoList) { _, _, _ -> notifyDataSetChanged() }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var view = holder.bindItems(allRepos[position])
-        view.setOnClickListener {
-            onActionClickListener?.invoke(allRepos[position], position)
-        }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(
             R.layout.itemlist_repocard,
             parent,
             false
         )
-        return ViewHolder(v)
+        return MyViewHolder(v)
 
     }
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
         val tvLabel: TextView by bindView(R.id.tvLabel)
