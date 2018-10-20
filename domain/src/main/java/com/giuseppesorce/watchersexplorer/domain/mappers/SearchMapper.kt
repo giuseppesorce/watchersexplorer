@@ -10,12 +10,33 @@ import javax.inject.Inject
  * @author Giuseppe Sorce
  */
 class SearchMapper @Inject constructor() {
-    fun getRepo(it: SearchRepoResponsePayLoad): List<Repo>? {
-        return  emptyList<Repo>()
+    fun getRepo(response: SearchRepoResponsePayLoad): List<Repo>? {
+
+
+        return response.items?.let {
+
+            it.map {
+                Repo(
+                    it.id ?: 0,
+                    it.watchers_count ?: 0,
+                    it.name,
+                    it.description,
+                    it.language ?: "",
+                    it.private,
+                    it?.fork,
+                    it.owner?.id ?: 0,
+                    it.owner?.login,
+                    it.owner?.avatar_url,
+                    it.owner?.repos_url
+                )
+            }
+
+        } ?: emptyList<Repo>()
+
     }
 
     fun getSubscribers(it: SearchSubscribersRepoResponsePayLoad): List<RepoSubscriber>? {
-        return  emptyList<RepoSubscriber>()
+        return emptyList<RepoSubscriber>()
 
     }
 
