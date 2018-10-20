@@ -61,5 +61,13 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
 
     }
 
+    fun onSubmitSearch(query: String) {
+
+    }
+
+    fun onQueryTextChangeSearch(query: Any) {
+
+    }
+
 
 }

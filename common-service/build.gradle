@@ -29,7 +29,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support:design:$android_support_version"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -40,7 +40,6 @@ dependencies {
 
     // Dagger 2
     compileOnly "com.google.dagger:dagger:$dagger_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Image Utilities
     implementation "com.squareup.picasso:picasso:$picasso_version"
