@@ -22,13 +22,15 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
 
     override fun getItemCount(): Int = allRepos.size
 
-    var onActionClickListener: ((action: String, position: Int) -> Unit)? = null
+    var onActionClickListener: ((action: Repo, position: Int) -> Unit)? = null
 
     var allRepos by Delegates.observable(repoList) { _, _, _ -> notifyDataSetChanged() }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var view = holder.bindItems(allRepos[position])
-
+        view.setOnClickListener {
+            onActionClickListener?.invoke(allRepos[position], position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -38,7 +40,6 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
             false
         )
         return MyViewHolder(v)
-
     }
 
 
@@ -50,10 +51,8 @@ class RepoListAdapter(repoList: List<Repo> = emptyList()) : RecyclerView.Adapter
         val tvDescription: TextView by bindView(R.id.tvDescription)
         val tvCount: TextView by bindView(R.id.tvCount)
         val tvWatcher: TextView by bindView(R.id.tvWatcher)
-
         fun bindItems(repo: Repo): View {
             Picasso.get().load(repo.avatar_url).resize(300,300).transform(CircleTransformBorder(Color.parseColor("#d8d8d8"))).into(ivAvatar)
-
             tvRepoName.text = repo.name
             tvOwnerName.text = repo.nameOwner
             tvDescription.text = repo.description

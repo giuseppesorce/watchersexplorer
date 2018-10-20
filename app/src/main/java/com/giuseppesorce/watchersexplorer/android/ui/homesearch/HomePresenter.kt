@@ -64,7 +64,7 @@ class HomePresenter @Inject constructor(
 
 
     fun onSubmitSearch(query: String) {
-        if (query.isNullOrEmpty() || query.length < MIN_CHARS) {
+        if (query.isEmpty() || query.length < MIN_CHARS) {
             view?.showMessage("Error min chars is...")
         } else {
             searchRepo(query)
