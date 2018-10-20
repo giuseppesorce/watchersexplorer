@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @author Giuseppe Sorce
  */
 class SearchMapper @Inject constructor() {
-    fun getRepo(response: SearchRepoResponsePayLoad): List<Repo>? {
+    fun getRepo(response: SearchRepoResponsePayLoad): List<Repo> {
 
 
         return response.items?.let {

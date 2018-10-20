@@ -32,12 +32,14 @@ class HomePresenter @Inject constructor(private val searchUseCases: SearchRepoUs
 
     override fun attachView(view: HomeView) {
         this.view = view
+        view.setupView()
     }
 
    private fun searchRepo(word: String) {
 
-        searchUseCases.execute(SearchParameters(word)).subscribe({ data ->
-            Log.i("watcher", "Repo: "+data.size)
+        searchUseCases.execute(SearchParameters(word)).subscribe({ repo ->
+
+            view?.updateRepoList(repo)
 
                  }, { error ->
                    Log.e("watcher", "ERRORE: "+error)

@@ -2,22 +2,27 @@ package com.giuseppesorce.watchersexplorer.android.ui.homesearch
 
 import android.os.Bundle
 import android.support.v4.view.MenuItemCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import com.giuseppesorce.watchersexplorer.R
 import com.giuseppesorce.watchersexplorer.android.mvp.MvpActivity
 import com.giuseppesorce.watchersexplorer.android.mvp.Presenter
-import kotlinx.android.synthetic.main.c_toolbar.*
+import com.giuseppesorce.watchersexplorer.android.ui.homesearch.adapters.RepoListAdapter
+import com.giuseppesorce.watchersexplorer.data.api.models.Repo
+import kotlinx.android.synthetic.main.activity_homesearch.*
+
 import javax.inject.Inject
 
 class HomeSearchActivity : MvpActivity(), HomeView {
-    override fun showMessage(message: String) {
 
-
-    }
 
     @Inject
     lateinit var presenter: HomePresenter
+
+    private val repoListAdapter: RepoListAdapter by lazy {
+        RepoListAdapter()
+    }
 
     override fun getPresenter(): Presenter<*> = presenter
 
@@ -52,11 +57,29 @@ class HomeSearchActivity : MvpActivity(), HomeView {
                 presenter.onSubmitSearch(query)
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 presenter.onQueryTextChangeSearch(newText)
                 return false
             }
         })
+    }
+
+    override fun updateRepoList(reposList: List<Repo>) {
+
+        repoListAdapter.allRepos = reposList
+    }
+
+    override fun setupView() {
+        val layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        rvList.layoutManager = layoutManager
+        rvList.adapter = repoListAdapter
+    }
+
+
+    override fun showMessage(message: String) {
+
+
     }
 
 
